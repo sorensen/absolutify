@@ -1,7 +1,7 @@
 {
   "name": "relative-replace",
   "author": "Beau Sorensen <mail@beausorensen.com> (http://github.com/sorensen)",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Relative URL replacer",
   "keywords": [
     "url",
