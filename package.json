@@ -1,0 +1,35 @@
+{
+  "name": "relative-replace",
+  "author": "Beau Sorensen <mail@beausorensen.com> (http://github.com/sorensen)",
+  "version": "0.0.1",
+  "description": "Relative URL replacer",
+  "keywords": [
+    "url",
+    "replace",
+    "relative",
+    "absolute",
+    "html"
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/sorensen/relative-replace/license"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sorensen/relative-replace.git"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run hint && ./node_modules/.bin/mocha -R spec ./test.js",
+    "hint": "./node_modules/.bin/jshint ./",
+    "minify": "./node_modules/.bin/uglifyjs $npm_package_name.js --output $npm_package_name.min.js --compress --mangle"
+  },
+  "devDependencies": {
+    "jshint": "^2.8.0",
+    "mocha": "^2.4.5",
+    "uglify-js": "2.6.2"
+  }
+}
