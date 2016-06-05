@@ -2,8 +2,8 @@
 
 var assert = require('assert')
 
-describe('absolute.js', function() {
-  var absolute = require('./index')
+describe('relative-replace', function() {
+  var replace = require('./index')
 
   // Non-changing string, should not get replaced
   var ok = ''
@@ -14,7 +14,7 @@ describe('absolute.js', function() {
 
   it('string replace', function() {
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="/relative">Heyo</a>' + ok
       , 'http://www.example.com'
       )
@@ -22,7 +22,7 @@ describe('absolute.js', function() {
     )
 
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="../relative">Heyo</a>' + ok
       , 'http://www.example.com'
       )
@@ -32,7 +32,7 @@ describe('absolute.js', function() {
 
   it('string replace single quote', function() {
     assert.strictEqual(
-      absolute(
+      replace(
         "<a href='../relative'>Heyo</a>" + ok
       , 'http://www.example.com'
       )
@@ -42,7 +42,7 @@ describe('absolute.js', function() {
 
   it('string multi-replace', function() {
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="/relative">Heyo</a><form action="/index.php">' + ok
       , 'http://www.example.com'
       )
@@ -52,7 +52,7 @@ describe('absolute.js', function() {
 
   it('function replace', function() {
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="/relative">Heyo</a>' + ok
       , function(url, attr) {
           return 'http://www.example.com' + url
@@ -62,7 +62,7 @@ describe('absolute.js', function() {
     )
 
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="../two">Heyo</a>' + ok
       , function(url, attr) {
           return 'http://www.example.com/public/' + url
@@ -72,7 +72,7 @@ describe('absolute.js', function() {
     )
 
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="./three">Heyo</a>' + ok
       , function(url, attr) {
           return 'http://www.example.com/' + url
@@ -84,7 +84,7 @@ describe('absolute.js', function() {
 
   it('function multi-replace', function() {
     assert.strictEqual(
-      absolute(
+      replace(
         '<a href="/relative">Heyo</a><form action="/index.php">' + ok
       , function(url, attr) {
           return 'http://www.example.com' + url
