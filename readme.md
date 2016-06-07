@@ -16,17 +16,13 @@ manipulation for finding and replacing URLs, using `jQuery`, `cheerio`, and/or `
 Install
 -------
 
-With [npm](https://npmjs.org)
-
 ```
-npm install relative-replace
+npm install absolutify
 ```
 
 
 Usage
 -----
-
-Node.js
 
 ```js
 var absolutify = require('absolutify')
