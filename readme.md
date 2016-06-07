@@ -1,9 +1,9 @@
 Absolutify
 ==========
 
-[![Build Status](https://secure.travis-ci.org/sorensen/relative-replace.png)](http://travis-ci.org/sorensen/relative-replace)
-[![devDependency Status](https://david-dm.org/sorensen/relative-replace.png)](https://david-dm.org/sorensen/relative-replace#info=dependencies)
-[![NPM version](https://badge.fury.io/js/relative-replace.png)](http://badge.fury.io/js/relative-replace)
+[![Build Status](https://secure.travis-ci.org/sorensen/absolutify.png)](http://travis-ci.org/sorensen/absolutify)
+[![devDependency Status](https://david-dm.org/sorensen/absolutify.png)](https://david-dm.org/sorensen/absolutify#info=dependencies)
+[![NPM version](https://badge.fury.io/js/absolutify.png)](http://badge.fury.io/js/absolutify)
 
 Replace relative URLs in a string with absolute URLs. This library is extremely
 small and lightweight, and requires no external dependencies.
