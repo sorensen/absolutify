@@ -1,8 +1,8 @@
 {
-  "name": "relative-replace",
+  "name": "absolutify",
   "author": "Beau Sorensen <mail@beausorensen.com> (http://github.com/sorensen)",
   "version": "0.0.1",
-  "description": "Relative URL replacer",
+  "description": "Relative to Absolute URL Replacer",
   "keywords": [
     "url",
     "replace",
@@ -12,16 +12,16 @@
   ],
   "license": {
     "type": "MIT",
-    "url": "https://github.com/sorensen/relative-replace/license"
+    "url": "https://github.com/sorensen/absolutify/license"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sorensen/relative-replace.git"
+    "url": "git://github.com/sorensen/absolutify.git"
   },
   "engines": {
     "node": ">=4.0"
   },
-  "main": "index.js",
+  "main": "absolutify.js",
   "scripts": {
     "test": "npm run hint && ./node_modules/.bin/mocha -R spec ./test.js",
     "hint": "./node_modules/.bin/jshint ./",

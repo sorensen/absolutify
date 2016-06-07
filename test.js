@@ -2,8 +2,8 @@
 
 var assert = require('assert')
 
-describe('relative-replace', function() {
-  var replace = require('./index')
+describe('absolutify', function() {
+  var absolutify = require('./absolutify')
 
   // Non-changing string, should not get replaced
   var ok = ''
@@ -14,7 +14,7 @@ describe('relative-replace', function() {
 
   it('string replace', function() {
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="/relative">Heyo</a>' + ok
       , 'http://www.example.com'
       )
@@ -22,17 +22,25 @@ describe('relative-replace', function() {
     )
 
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="../relative">Heyo</a>' + ok
       , 'http://www.example.com'
       )
     , '<a href="http://www.example.com/../relative">Heyo</a>' + ok
     )
+
+    assert.strictEqual(
+      absolutify(
+        '<a href="/">Heyo</a>' + ok
+      , 'http://www.example.com'
+      )
+    , '<a href="http://www.example.com/">Heyo</a>' + ok
+    )
   })
 
   it('string replace single quote', function() {
     assert.strictEqual(
-      replace(
+      absolutify(
         "<a href='../relative'>Heyo</a>" + ok
       , 'http://www.example.com'
       )
@@ -42,7 +50,7 @@ describe('relative-replace', function() {
 
   it('string multi-replace', function() {
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="/relative">Heyo</a><form action="/index.php">' + ok
       , 'http://www.example.com'
       )
@@ -52,7 +60,7 @@ describe('relative-replace', function() {
 
   it('function replace', function() {
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="/relative">Heyo</a>' + ok
       , function(url, attr) {
           return 'http://www.example.com' + url
@@ -62,7 +70,7 @@ describe('relative-replace', function() {
     )
 
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="../two">Heyo</a>' + ok
       , function(url, attr) {
           return 'http://www.example.com/public/' + url
@@ -72,7 +80,7 @@ describe('relative-replace', function() {
     )
 
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="./three">Heyo</a>' + ok
       , function(url, attr) {
           return 'http://www.example.com/' + url
@@ -84,7 +92,7 @@ describe('relative-replace', function() {
 
   it('function multi-replace', function() {
     assert.strictEqual(
-      replace(
+      absolutify(
         '<a href="/relative">Heyo</a><form action="/index.php">' + ok
       , function(url, attr) {
           return 'http://www.example.com' + url

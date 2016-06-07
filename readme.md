@@ -1,5 +1,5 @@
-Relative Replace
-================
+Absolutify
+==========
 
 [![Build Status](https://secure.travis-ci.org/sorensen/relative-replace.png)](http://travis-ci.org/sorensen/relative-replace)
 [![devDependency Status](https://david-dm.org/sorensen/relative-replace.png)](https://david-dm.org/sorensen/relative-replace#info=dependencies)
@@ -29,15 +29,15 @@ Usage
 Node.js
 
 ```js
-var replace = require('relative-replace')
+var absolutify = require('absolutify')
 
 var html = '<html><a href="/sorensen">Home</a></html>'
 var site = 'https://github.com'
 
-var absolute = replace(html, site)
+var parsed = absolutify(html, site)
 // '<html><a href="https://github.com/sorensen">Home</a></html>'
 
-var byFunction = replace(html, function(url, attrName) {
+var byFunction = absolutify(html, function(url, attrName) {
   // url === '/sorensen'
   // attr === 'href'
   return site + url
