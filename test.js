@@ -58,6 +58,16 @@ describe('absolutify', function() {
     )
   })
 
+  it('string replace anchor', function() {
+    assert.strictEqual(
+      absolutify(
+        '<a href="#section">Section</a>' + ok
+      , 'http://www.example.com'
+      )
+    , '<a href="http://www.example.com/#section">Section</a>' + ok
+    )
+  })
+
   it('function replace', function() {
     assert.strictEqual(
       absolutify(
@@ -87,6 +97,18 @@ describe('absolutify', function() {
         }
       )
     , '<a href="http://www.example.com/./three">Heyo</a>' + ok
+    )
+  })
+
+  it('function replace anchor', function() {
+    assert.strictEqual(
+      absolutify(
+        '<a href="#section">Section</a>' + ok
+      , function(url, attr) {
+          return 'http://www.example.com' + url
+        }
+      )
+    , '<a href="http://www.example.com#section">Section</a>' + ok
     )
   })
 
