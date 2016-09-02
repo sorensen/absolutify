@@ -1,7 +1,7 @@
 {
   "name": "absolutify",
   "author": "Beau Sorensen <mail@beausorensen.com> (http://github.com/sorensen)",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Relative to Absolute URL Replacer",
   "keywords": [
     "url",
