@@ -9,9 +9,11 @@
  * @return {String} replaced html source
  */
 
-function replace(str, url) {
-  if (typeof url === 'function') return replace.iterate(str, url)
-  return str.replace(replace.rx, '$1' + url + '/$4')
+function absolutify(str, url) {
+  if (typeof url === 'function') return absolutify.iterate(str, url)
+  return str
+    .replace(absolutify.rx, '$1' + url + '/$6')      // Inject the URL into the attribute
+    .replace(new RegExp(url + '//', 'g'), url + '/') // Fix `attr="/"` edgecase causing a `//` issue
 }
 
 /*!
@@ -19,15 +21,15 @@ function replace(str, url) {
  * ensure that the leading `/` of the url is not captured
  *
  * HTML attribute list from: http://stackoverflow.com/questions/2725156/complete-list-of-html-tag-attributes-which-have-a-url-value
+
+   1. find any possible element containing a url: `prop="`
+   2. ignore leading protocols: `prop="http:`
+   3. ignore protocol skips `prop="//`
+   4. find and omit leading slash to normalize: `prop="/url`
+   5.
  */
 
-replace.rx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])(([.]+\/)|(?:\/)|(?=#))(?!\/)/g
-
-/*!
- * Match the same as above, but capture the full URL for iteration
- */
-
-replace.captureRx = /((href|src|codebase|cite|background|cite|action|profile|formaction|icon|manifest|archive)=["'])((([.]+\/)|(?:\/)|(?:#))(?!\/)[a-zA-Z0-9._-]+)/g
+absolutify.rx = /((href|src|codebase|cite|background|action|profile|formaction|icon|manifest|archive)=["'])(?!(http|https|ftp|file|filesystem|gopher|ws|wss|about|blob|data|mailto):|(\/\/))((?:\/)?([^'"]+))/g // jshint ignore:line
 
 /**
  * URL replacement using function iteration, this is handled slightly
@@ -39,9 +41,15 @@ replace.captureRx = /((href|src|codebase|cite|background|cite|action|profile|for
  * @return {String} replaced html source
  */
 
-replace.iterate = function(str, iterator) {
-  return str.replace(replace.captureRx, function(full, prefix, prop, url) {
-    return prefix + iterator(url, prop)
+absolutify.iterate = function(str, iterator) {
+  return str.replace(absolutify.rx, function() {
+    var url = arguments[6]
+
+    return arguments[1] + iterator(
+      url === '/' ? '' : url // URL without leading `/` (check for `attr="/"` edgecase)
+    , arguments[2]           // HTML attribute
+    , arguments[5]           // Contains leading `/` if found
+    )
   })
 }
 
@@ -49,7 +57,7 @@ replace.iterate = function(str, iterator) {
  * Exports
  */
 
-if (typeof exports !== 'undefined') module.exports = replace
-else this.absolutify = replace
+if (typeof exports !== 'undefined') module.exports = absolutify
+else this.absolutify = absolutify
 
 }.call(this));
